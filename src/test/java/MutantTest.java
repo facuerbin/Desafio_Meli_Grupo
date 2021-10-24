@@ -1,4 +1,3 @@
-import com.mutant.mutantapi.searchMutant.MutantSearch;
 import com.mutant.mutantapi.searchMutant.MutantSearchRegex;
 
 import org.junit.jupiter.api.Test;
@@ -10,9 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MutantTest {
-    
-    @Autowired
-    MutantSearch mutantSearch;
 
     MutantSearchRegex regex = new MutantSearchRegex();
 
