@@ -2,18 +2,22 @@ package com.mutant.mutantapi.searchMutant;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 
 @Component
 public class MutantSearchRegex {
 
     private int mutantCount;
+    private static final char[] dnaLetters = {'A', 'C', 'T', 'G'}; // Letras válidas para ADN mutante
+    private static final int cantidadLetrasMutante = 4; // la cantidad de letras que se deben repetir para ADN mutante
 
     public boolean isMutant(String[] sequences){
         mutantCount = 0;
-        if(sequences.length < 4 && sequences[0].length() < 4 && sequences.length != sequences[0].length()) return false;
+        if( ! isValidArray(sequences) ) return false;
         return searchHorizontal(sequences) || searchVertical(sequences) || searchOblique(sequences) || searchContraOblique(sequences);
     }
+
     public void search(String sequence){
         if(Pattern.compile("(C|T|G|A)\\1{3,4}").matcher(sequence).find()) {
             mutantCount++;
@@ -73,4 +77,41 @@ public class MutantSearchRegex {
         }
         return false;
     }
+
+    public static String[] generateRandom(int size) {
+        String[] generatedDna = new String[size];
+        Random rand = new Random();
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < size; i++) {
+            String row = "";
+            for (int j = 0; j < size; j++) {
+                char letter = dnaLetters[rand.nextInt(dnaLetters.length)];
+                row += letter;
+            }
+            generatedDna[i] = row;
+        }
+
+        long totalTime = System.currentTimeMillis() - startTime;
+        System.out.println("Se tardó " + totalTime + " milisegundo en generar una matriz de ADN de " + size + "X" + size);
+        return generatedDna;
+    }
+
+    public static boolean isValidArray(String[] dna) {
+        int size = dna.length;
+        if (size < 4) {
+            // La matriz como mínimo debe ser de 4X4
+            return false;
+        }
+
+        for (String line : dna) {
+            if (line.length() != size) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

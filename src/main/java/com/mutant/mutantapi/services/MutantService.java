@@ -18,22 +18,10 @@ public class MutantService {
     MutantRepository mutantRepository;
 
    public boolean isMutant(String[] adns){
-//       Para reconstruir las secuencias
-//
-//       StringBuilder dna = new StringBuilder();
-//       Arrays.stream(adns).forEach(word -> dna.append(word));
-//       System.out.println(dna);
-//       System.out.println(Arrays.toString(
-//               dna.toString().split("(?<=\\G.{"+adns.length+"})")
-//       ));
-
        boolean isMutant = mutantSearch.isMutant(adns);
-       StringBuilder allSequences = new StringBuilder();
-       Arrays.stream(adns).forEach(sequence -> allSequences.append(sequence));
        Mutant mutant = Mutant.builder().
                isMutant(isMutant).
-               adn(allSequences.toString()).
-               adnLength(adns.length).
+                dna(adns).
                build();
 
        mutantRepository.save(mutant);

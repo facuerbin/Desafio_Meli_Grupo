@@ -19,11 +19,10 @@ public class Mutant {
     private Long id;
 
     @Column
-    private String adn;
-
-    @Column
-    private int adnLength;
+    private String[] dna;
 
     @Column
     private boolean isMutant;
+
+
 }

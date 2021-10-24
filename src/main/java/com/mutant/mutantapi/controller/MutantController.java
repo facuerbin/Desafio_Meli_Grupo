@@ -1,5 +1,6 @@
 package com.mutant.mutantapi.controller;
 
+import com.mutant.mutantapi.model.Mutant;
 import com.mutant.mutantapi.services.MutantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,8 @@ public class MutantController {
     private MutantService mutantService;
 
     @PostMapping
-    public ResponseEntity isMutant(@RequestBody String[] dna){
-        return mutantService.isMutant(dna) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity isMutant(@RequestBody Mutant mutant){
+        return mutantService.isMutant(mutant.getDna()) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 }
