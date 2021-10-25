@@ -58,8 +58,8 @@ public class MutantController {
             int countHuman = countTotal-countMutant;
             double ratio = (double) countMutant/(double) countHuman;
             StatsDTO dtoEstadistica = StatsDTO.builder().
-                    countMutantDNA(countMutant).
-                    countHumanDNA(countHuman).
+                    count_mutant_dna(countMutant).
+                    count_human_dna(countHuman).
                     ratio(ratio).
                     build();
             return ResponseEntity.status(HttpStatus.OK).body((dtoEstadistica));
