@@ -18,10 +18,10 @@ public class Mutant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String[] dna;
 
-    @Column
+    @Column(name = "is_mutant")
     private boolean isMutant;
 
 
