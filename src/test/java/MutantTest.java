@@ -23,4 +23,16 @@ public class MutantTest {
         assertFalse(regex.isMutant(dnas));
     }
 
+    @Test
+    public void regexNot4x4Test(){
+        String[] dnas = {"ATG", "CAG", "TTA"};
+        assertFalse(regex.isMutant(dnas));
+    }
+
+    @Test
+    public void regexNotSquareTest(){
+        String[] dnas = {"ATGCGAA", "CAGTGCA", "TTATTTA", "AGACGGA", "GCGTCAA", "TCACTGA"};
+        assertFalse(regex.isMutant(dnas));
+    }
+
 }
