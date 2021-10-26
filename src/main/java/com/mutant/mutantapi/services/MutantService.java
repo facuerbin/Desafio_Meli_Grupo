@@ -14,8 +14,12 @@ public class MutantService {
     @Autowired
     MutantSearchRegex mutantSearch;
 
-    @Autowired
+//    @Autowired
     MutantRepository mutantRepository;
+    @Autowired
+    public MutantService(MutantRepository repository){
+        this.mutantRepository = repository;
+    }
 
     public List<Mutant> getAll () {
             return mutantRepository.findAll();
