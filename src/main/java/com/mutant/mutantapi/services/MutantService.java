@@ -11,14 +11,15 @@ import java.util.List;
 @Service
 public class MutantService {
 
-    @Autowired
+//    @Autowired
     MutantSearchRegex mutantSearch;
 
 //    @Autowired
     MutantRepository mutantRepository;
     @Autowired
-    public MutantService(MutantRepository repository){
+    public MutantService(MutantRepository repository, MutantSearchRegex regex){
         this.mutantRepository = repository;
+        this.mutantSearch = regex;
     }
 
     public List<Mutant> getAll () {
