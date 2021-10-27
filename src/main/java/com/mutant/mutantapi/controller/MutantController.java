@@ -36,8 +36,8 @@ public class MutantController {
                         responseCode = "200",
                         description = "Retorna 200 en caso de que el ADN enviado sea mutante. Es decir tiene mínimo 2 cadenas de 4 letras iguales sucesivas en cualquier dirección. No devuelve contenido"
                 ), @ApiResponse(
-                        responseCode = "443",
-                        description = "Retorna 443 en caso de que el ADN enviado NO sea mutante. No devuelve contenido"
+                        responseCode = "403",
+                        description = "Retorna 403 en caso de que el ADN enviado NO sea mutante. No devuelve contenido"
                     )
             }
     )
