@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -30,8 +31,7 @@ public class MutantServiceTest {
     @Mock
     MutantRepository repository;
 
-
-
+    @InjectMocks
     MutantService service;
 
     @BeforeEach
@@ -42,8 +42,6 @@ public class MutantServiceTest {
         Mutant mutant3 = new Mutant(3L,dnas,false);
 
         mutants = new ArrayList<>(Arrays.asList(mutant1,mutant2,mutant3));
-
-        service = new MutantService(repository,regex);
 
     }
 

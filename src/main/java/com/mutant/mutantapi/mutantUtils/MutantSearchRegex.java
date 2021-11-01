@@ -2,14 +2,13 @@ package com.mutant.mutantapi.mutantUtils;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 @Component
 public class MutantSearchRegex {
 
     private int mutantCount;
-    private static final int cantidadLetrasMutante = 4; // la cantidad de letras que se deben repetir para ADN mutante
 
     public boolean isMutant(String[] sequences){
         mutantCount = 0;
@@ -18,7 +17,7 @@ public class MutantSearchRegex {
     }
 
     public void search(String sequence){
-        if(Pattern.compile("(C|T|G|A)\\1{3,4}").matcher(sequence).find()) {
+        if(Pattern.compile("(C|T|G|A)\\1{3,4}").matcher(sequence.toUpperCase(Locale.ROOT)).find()) {
             mutantCount++;
             System.out.println("Encontrado " + sequence);
         }

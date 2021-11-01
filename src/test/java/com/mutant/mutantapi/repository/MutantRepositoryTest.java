@@ -36,6 +36,7 @@ public class MutantRepositoryTest {
 
         List<Mutant> mutants = repository.findAll();
         Assertions.assertNotNull(mutants);
+        Assertions.assertEquals(3,listExpected.size());
         Assertions.assertEquals(listExpected,mutants);
     }
 
