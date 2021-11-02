@@ -17,7 +17,7 @@ public class MutantSearchRegex {
     }
 
     public void search(String sequence){
-        if(Pattern.compile("(C|T|G|A)\\1{3,4}").matcher(sequence.toUpperCase(Locale.ROOT)).find()) {
+        if(Pattern.compile("(C|T|G|A)\\1{3,3}",Pattern.CASE_INSENSITIVE).matcher(sequence).find()) {
             mutantCount++;
             System.out.println("Encontrado " + sequence);
         }
@@ -65,7 +65,7 @@ public class MutantSearchRegex {
         int height = sequences.length;
         int width = sequences[0].length();
         for (int diagonal = 1 - width; diagonal <= height - 1; diagonal += 1) {
-            for (int vertical = Math.max(0, diagonal), horizontal = Math.min(width - 1, diagonal+width-1);
+            for (int vertical = Math.max(0, diagonal), horizontal = Math.min(width - 1, diagonal + width-1);
                  vertical < height && horizontal >= 0; vertical += 1, horizontal -= 1) {
                 sequence += sequences[vertical].charAt(horizontal) ;
             }
