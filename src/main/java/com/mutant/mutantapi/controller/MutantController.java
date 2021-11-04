@@ -6,7 +6,6 @@ import com.mutant.mutantapi.services.MutantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,6 +24,8 @@ import static com.mutant.mutantapi.mutantUtils.GenerateRandom.generateRandom;
 @CrossOrigin
 @RequestMapping(path = "/api/v1/mutant")
 public class MutantController {
+    @Autowired
+    private MutantService mutantService;
 
     @Operation(
             summary = "Endpoint que recibe ADN y responde si es ADN mutante. En caso de ser ADN mutante retorna estado 200 y si no lo es retorna 403",
@@ -46,9 +47,6 @@ public class MutantController {
         return mutantService.isMutant(mutant.getDna()) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-
-    @Autowired
-    private MutantService mutantService;
 
     @Operation(
             summary = "Endpoint que retorna un array con todos los ADN analizados por el sistema."
