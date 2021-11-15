@@ -1,5 +1,6 @@
 package com.mutant.mutantapi.controller;
 
+import com.mutant.mutantapi.dto.MutantDTO;
 import com.mutant.mutantapi.dto.StatsDTO;
 import com.mutant.mutantapi.model.Mutant;
 import com.mutant.mutantapi.services.MutantService;
@@ -43,7 +44,7 @@ public class MutantController {
             }
     )
     @PostMapping
-    public ResponseEntity isMutant(@RequestBody Mutant mutant){
+    public ResponseEntity isMutant(@RequestBody MutantDTO mutant){
         return mutantService.isMutant(mutant.getDna()) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
@@ -62,10 +63,10 @@ public class MutantController {
     @GetMapping("")
     public ResponseEntity<?> getAll () {
         try {
-            List<Mutant> allMutants = mutantService.getAll();
+            List<MutantDTO> allMutants = mutantService.getAll();
             return ResponseEntity.status(HttpStatus.OK).body(allMutants);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(("{\"error\":\"" + e.getMessage() + "\"}"));
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
     }
 
@@ -116,15 +117,7 @@ public class MutantController {
     @GetMapping("/stats")
     public ResponseEntity<?> stats() {
         try {
-            int countTotal = mutantService.countTotal();
-            int countMutant = mutantService.countMutant();
-            int countHuman = countTotal-countMutant;
-            double ratio = (double) countMutant/(double) countHuman;
-            StatsDTO dtoEstadistica = StatsDTO.builder().
-                    count_mutant_dna(countMutant).
-                    count_human_dna(countHuman).
-                    ratio(ratio).
-                    build();
+            StatsDTO dtoEstadistica = mutantService.stats();
             return ResponseEntity.status(HttpStatus.OK).body((dtoEstadistica));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(("{\"error\":\"" + e.getMessage() + "\"}"));

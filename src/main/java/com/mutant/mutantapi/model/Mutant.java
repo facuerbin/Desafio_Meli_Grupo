@@ -20,7 +20,7 @@ public class Mutant {
     private Long id;
 
     @Column(unique = true)
-    private String[] dna;
+    private String dna;
 
     @Column(name = "is_mutant")
     private boolean isMutant;
