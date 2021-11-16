@@ -21,19 +21,18 @@ public class MutantMapper {
         }
         return mutantsDTO;
     }
-    public static List<Mutant> toEntity(List<MutantDTO> dtos){
-        List<Mutant> mutants = new ArrayList<Mutant>();
-        for(MutantDTO dto : dtos){
-            StringBuilder sb = new StringBuilder();
-            Arrays.stream(dto.getDna()).forEach(x -> sb.append(x));
-            mutants.add(
-              Mutant.builder()
-                      .isMutant(dto.isMutant())
-                      .dna(sb.toString())
-                      .build()
-            );
-        }
-        return mutants;
-    }
+//    public static List<Mutant> toEntity(List<MutantDTO> dtos){
+//        List<Mutant> mutants = new ArrayList<Mutant>();
+//        for(MutantDTO dto : dtos){
+//            StringBuilder sb = new StringBuilder();
+//            Arrays.stream(dto.getDna()).forEach(x -> sb.append(x));
+//            mutants.add(
+//              Mutant.builder()
+//                      .isMutant(dto.isMutant())
+//                      .dna(sb.toString())
+//                      .build()
+//            );
+//        }
+//        return mutants;
+//    }
 }
-//mutant.getDna()

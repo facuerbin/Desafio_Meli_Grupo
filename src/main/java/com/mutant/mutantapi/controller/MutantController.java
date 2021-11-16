@@ -2,8 +2,7 @@ package com.mutant.mutantapi.controller;
 
 import com.mutant.mutantapi.dto.MutantDTO;
 import com.mutant.mutantapi.dto.StatsDTO;
-import com.mutant.mutantapi.model.Mutant;
-import com.mutant.mutantapi.services.MutantService;
+import com.mutant.mutantapi.services.MutantServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -26,7 +25,7 @@ import static com.mutant.mutantapi.mutantUtils.GenerateRandom.generateRandom;
 @RequestMapping(path = "/api/v1/mutant")
 public class MutantController {
     @Autowired
-    private MutantService mutantService;
+    private MutantServiceImpl mutantService;
 
     @Operation(
             summary = "Endpoint que recibe ADN y responde si es ADN mutante. En caso de ser ADN mutante retorna estado 200 y si no lo es retorna 403",
