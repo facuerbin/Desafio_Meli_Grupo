@@ -1,11 +1,13 @@
 package com.mutant.mutantapi.mutantUtils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
 import java.util.regex.Pattern;
 
 @Component
+@Slf4j
 public class MutantSearchRegex {
 
     private int mutantCount;
@@ -17,9 +19,9 @@ public class MutantSearchRegex {
     }
 
     public void search(String sequence){
-        if(Pattern.compile("(C|T|G|A)\\1{3,3}",Pattern.CASE_INSENSITIVE).matcher(sequence).find()) {
+        if(Pattern.compile("(C|T|G|A)\\1{3}",Pattern.CASE_INSENSITIVE).matcher(sequence).find()) {
             mutantCount++;
-            System.out.println("Encontrado " + sequence);
+            log.info("Encontrado : " + sequence);
         }
     }
 

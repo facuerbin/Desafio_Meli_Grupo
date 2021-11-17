@@ -71,7 +71,7 @@ public class MutantServiceTest {
         Assertions.assertTrue(isMutant);
     }
     @Test
-    public void stats(){
+    public void stats()throws Exception{
         Mockito.when(repository.countMutant()).thenReturn(2);
         Mockito.when(repository.countTotal()).thenReturn(3);
 
@@ -80,4 +80,15 @@ public class MutantServiceTest {
         Assertions.assertNotNull(stats);
         Assertions.assertEquals(2.0,stats.getRatio());
     }
+
+//    @Test
+//    public void statsDividedByZero()throws Exception{
+//        Mockito.when(repository.countMutant()).thenReturn(2);
+//        Mockito.when(repository.countTotal()).thenReturn(2);
+//
+//        StatsDTO stats = service.stats();
+//
+//        Assertions.assertNotNull(stats);
+//        Assertions.assertEquals(2.0,stats.getRatio());
+//    }
 }

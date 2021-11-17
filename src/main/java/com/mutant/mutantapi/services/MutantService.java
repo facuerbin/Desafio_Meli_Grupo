@@ -12,6 +12,6 @@ import java.util.Optional;
      int countTotal ();
      int countMutant ();
      List<MutantDTO> getAll ();
-     StatsDTO stats();
+     StatsDTO stats() throws Exception;
      boolean isMutant(String[] adns);
 }

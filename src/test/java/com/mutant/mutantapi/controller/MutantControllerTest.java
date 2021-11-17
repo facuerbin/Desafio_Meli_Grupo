@@ -16,9 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,9 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MutantController.class)
 public class MutantControllerTest {
     String[] dnas = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
-    String dnasDTO = Arrays.stream(dnas).collect(Collectors.joining());
     String basePath = "/api/v1/mutant";
-    String requestBody ;
+    MutantDTO requestMutantDTO;
     StatsDTO stats;
     List<MutantDTO> mutantsDTO;
 
@@ -46,10 +43,8 @@ public class MutantControllerTest {
         MutantDTO mutant2 = MutantDTO.builder().id(2L).dna(dnas).isMutant(false).build();
         MutantDTO mutant3 = MutantDTO.builder().id(3L).dna(dnas).isMutant(true).build();
 
+        requestMutantDTO = MutantDTO.builder().dna(dnas).build();
 
-        requestBody = "{\n" +
-                "    \"dna\":[\"ATGCGA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCCCTA\",\"TCACTG\"]\n" +
-                "}";
 
         mutantsDTO.add(mutant1);
         mutantsDTO.add(mutant2);
@@ -66,7 +61,7 @@ public class MutantControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.
                         post(basePath).
                         contentType(MediaType.APPLICATION_JSON).
-                        content(requestBody).
+                        content(JsonParser.toJsonString(requestMutantDTO)).
                         accept(MediaType.APPLICATION_JSON)).
                         andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -80,7 +75,7 @@ public class MutantControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.
                 post(basePath).
                 contentType(MediaType.APPLICATION_JSON).
-                content(requestBody).
+                content(JsonParser.toJsonString(requestMutantDTO)).
                 accept(MediaType.APPLICATION_JSON)).
                 andExpect(MockMvcResultMatchers.status().isForbidden());
     }
@@ -99,7 +94,6 @@ public class MutantControllerTest {
     @Test
     public void statsTest() throws Exception{
         Mockito.when(mutantService.stats()).thenReturn(stats);
-
 
         mockMvc.perform(MockMvcRequestBuilders.get(basePath + "/stats").
                 accept(MediaType.APPLICATION_JSON)).

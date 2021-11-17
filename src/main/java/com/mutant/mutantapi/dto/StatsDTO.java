@@ -2,7 +2,6 @@ package com.mutant.mutantapi.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import org.json.JSONObject;
 
 @Data
 @Builder

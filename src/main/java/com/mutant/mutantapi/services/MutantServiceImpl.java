@@ -46,16 +46,22 @@ public class MutantServiceImpl implements MutantService{
         return MutantMapper.toDTO(listMutants);
     }
 
-    public StatsDTO stats(){
+    public StatsDTO stats() throws Exception{
         int countTotal = this.countTotal();
         int countMutant = this.countMutant();
         int countHuman = countTotal-countMutant;
-        double ratio = (double) countMutant/(double) countHuman;
-        return  StatsDTO.builder().
-                count_mutant_dna(countMutant).
-                count_human_dna(countHuman).
-                ratio(ratio).
-                build();
+        try{
+            double ratio = (double) countMutant/(double) countHuman;
+            return  StatsDTO.builder().
+                    count_mutant_dna(countMutant).
+                    count_human_dna(countHuman).
+                    ratio(ratio).
+                    build();
+        }catch (Exception e){
+            log.error(e.getMessage());
+            throw new Exception();
+        }
+
 
     }
 
