@@ -74,13 +74,13 @@ public class MutantServiceImpl implements MutantService{
         if(!existingMutant.isEmpty()){
             return existingMutant.get().isMutant();
         }
-
-        boolean isMutant = mutantSearch.isMutant(adns);
-        Mutant mutant = Mutant.builder()
-                           .isMutant(isMutant)
-                           .dna(sb.toString())
-                           .build();
+       boolean isMutant = false;
         try {
+            isMutant = mutantSearch.isMutant(adns);
+            Mutant mutant = Mutant.builder()
+                    .isMutant(isMutant)
+                    .dna(sb.toString())
+                    .build();
             log.info("Saving Mutant : " + mutant.toString());
             mutantRepository.save(mutant);
         } catch (JDBCException e) {

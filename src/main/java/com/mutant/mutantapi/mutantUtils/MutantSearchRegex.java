@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 @Component
@@ -12,20 +13,21 @@ public class MutantSearchRegex {
 
     private int mutantCount;
 
-    public boolean isMutant(String[] sequences){
+    public boolean isMutant(String[] sequences)throws Exception{
         mutantCount = 0;
         if( ! isValidArray(sequences) ) return false;
         return searchHorizontal(sequences) || searchVertical(sequences) || searchOblique(sequences) || searchContraOblique(sequences);
     }
 
-    public void search(String sequence){
+    public void search(String sequence) throws Exception{
+        if(Pattern.compile("[^C|T|A|G]",Pattern.CASE_INSENSITIVE).matcher(sequence).find()) throw new Exception();
         if(Pattern.compile("(C|T|G|A)\\1{3}",Pattern.CASE_INSENSITIVE).matcher(sequence).find()) {
             mutantCount++;
             log.info("Encontrado : " + sequence);
         }
     }
 
-    public boolean searchHorizontal(String[] sequences){
+    public boolean searchHorizontal(String[] sequences)throws Exception{
         for(String e : sequences){
             search(e);
             if(mutantCount >= 2) return true;
@@ -33,7 +35,7 @@ public class MutantSearchRegex {
         return false;
     }
 
-    public boolean searchVertical(String[] sequences){
+    public boolean searchVertical(String[] sequences)throws Exception{
         String sequence = "";
             for(int i = 0 ; i < sequences.length ; i ++){
                 for(int j = 0 ; j < sequences.length; j ++){
@@ -46,7 +48,7 @@ public class MutantSearchRegex {
         return false;
     }
 
-    public boolean searchOblique (String[] sequences){
+    public boolean searchOblique (String[] sequences)throws Exception{
         String sequence = "";
         int height = sequences.length;
         int width = sequences[0].length();
@@ -62,7 +64,7 @@ public class MutantSearchRegex {
         return false;
     }
 
-    public boolean searchContraOblique(String[] sequences){
+    public boolean searchContraOblique(String[] sequences)throws Exception{
         String sequence = "";
         int height = sequences.length;
         int width = sequences[0].length();
