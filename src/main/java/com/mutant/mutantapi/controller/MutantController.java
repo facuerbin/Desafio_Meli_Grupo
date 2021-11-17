@@ -1,5 +1,6 @@
 package com.mutant.mutantapi.controller;
 
+import com.mutant.mutantapi.dto.DnaDTO;
 import com.mutant.mutantapi.dto.MutantDTO;
 import com.mutant.mutantapi.dto.StatsDTO;
 import com.mutant.mutantapi.services.MutantServiceImpl;
@@ -43,8 +44,8 @@ public class MutantController {
             }
     )
     @PostMapping
-    public ResponseEntity isMutant(@RequestBody MutantDTO mutant){
-        return mutantService.isMutant(mutant.getDna()) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity isMutant(@RequestBody DnaDTO dna){
+        return mutantService.isMutant(dna.getDna()) ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 

@@ -1,7 +1,10 @@
 package com.mutant.mutantapi.mutantUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Random;
 
+@Slf4j
 public class GenerateRandom {
     private static final char[] dnaLetters = {'A', 'C', 'T', 'G'}; // Letras válidas para ADN mutante
 
@@ -21,7 +24,8 @@ public class GenerateRandom {
         }
 
         long totalTime = System.currentTimeMillis() - startTime;
-        System.out.println("Se tardó " + totalTime + " milisegundo en generar una matriz de ADN de " + size + "X" + size);
+
+        log.info("Se tardó " + totalTime + " milisegundo en generar una matriz de ADN de " + size + "X" + size);
         return generatedDna;
     }
 }

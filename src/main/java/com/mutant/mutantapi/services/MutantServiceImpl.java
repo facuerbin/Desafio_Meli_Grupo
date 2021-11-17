@@ -47,6 +47,7 @@ public class MutantServiceImpl implements MutantService{
     }
 
     public StatsDTO stats() throws Exception{
+        log.info("Generating stats");
         int countTotal = this.countTotal();
         int countMutant = this.countMutant();
         int countHuman = countTotal-countMutant;

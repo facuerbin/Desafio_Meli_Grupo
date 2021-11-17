@@ -64,7 +64,11 @@ public class MutantServiceTest {
     }
     @Test
     public void isMutantTest(){
-        Mockito.when(regex.isMutant(dnas)).thenReturn(true);
+        try {
+            Mockito.when(regex.isMutant(dnas)).thenReturn(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         boolean isMutant = service.isMutant(dnas);
 

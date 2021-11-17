@@ -16,13 +16,21 @@ public class MutantSearchTest {
     public void regexTest(){
         String[] dnas = {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"};
 
-        assertTrue(regex.isMutant(dnas));
+        try {
+            assertTrue(regex.isMutant(dnas));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void regexNotOkTest(){
         String[] dnas = {"ATGCGA", "CAGTGC", "TTATTT", "AGACGG", "GCGTCA", "TCACTG"};
-        assertFalse(regex.isMutant(dnas));
+        try {
+            assertFalse(regex.isMutant(dnas));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
